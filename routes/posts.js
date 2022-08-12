@@ -5,12 +5,11 @@ const postApi = require("express").Router();
 //create  new post :
 
 // front end axios req
-const [state, setState] = useState({
-  title: "",
-  description: "",
-  location: "",
-});
-
+// const [state, setState] = useState({
+//   title: "",
+//   description: "",
+//   location: "",
+// });
 // const createNewPost = async() => {
 //   let create_post=await axios.post("http://localhost:5000/posts",state);
 //   console.log(create_post.data.message);
@@ -31,16 +30,16 @@ postApi.post("/", async (req, res) => {
     });
   }
 });
-const [allPosts, setAllPosts] = useState([]);
-// get axios req
 
+// const [allPosts, setAllPosts] = useState([]);
+// get axios req
 // const getAllPosts =async () => {
 //   let all_posts=await axios.get("http://localhost:5000/posts");
 //   setAllPosts(allPosts.data);
-
 //  }
 
 // get all posts route;
+
 postApi.get("/", async (req, res) => {
   try {
     const all_posts = await db.posts.find().toArray(); //[{},{}]
