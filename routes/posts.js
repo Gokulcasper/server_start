@@ -16,7 +16,7 @@ const postApi = require("express").Router();
 //  }
 
 postApi.post("/", async (req, res) => {
-  console.log("create post requested");
+  console.log("post requested");
   try {
     let postData = req.body;
 
