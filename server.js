@@ -9,13 +9,20 @@ console.log("in server");
 let PORT = 5000;
 
 (async () => {
-  server.use(cors("*")); // * means all url could access this server
-  server.use(express.json()); //string("{"names":"["muthu","mani"]"}") into json( {names:["muthu","mani"]} ) parsing
-  await db.connect();
+  try {
+    server.use(cors("*")); // * means all url could access this server
+    server.use(express.json()); //string("{"names":"["muthu","mani"]"}") into json( {names:["muthu","mani"]} ) parsing
+    await db.connect();
 
-  server.get("/", (req, res) => {
-    res.status(200).send("Server is running successfully");
-  });
+    server.get("/", (req, res) => {
+      res.status(200).send("Server is running successfully");
+    });
+  } catch (error) {
+    res.status(500).send({
+      message: error.message,
+      error_message: "server is not created",
+    });
+  }
 
   // posts routes
   server.use("/posts", postApi);
