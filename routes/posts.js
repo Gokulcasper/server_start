@@ -19,9 +19,9 @@ postApi.post("/", async (req, res) => {
   console.log("post requested");
   try {
     let postData = req.body;
+    console.log("bdy dta:", req.body);
 
-    console.log("post data:", postData);
-    await db.posts.insertOne({ postData });
+    await db.posts.insertOne(postData);
     res.status(201).send({ message: "post created successfully" });
   } catch (error) {
     res.status(500).send({
@@ -45,7 +45,8 @@ postApi.get("/", async (req, res) => {
     const all_posts = await db.posts.find().toArray(); //[{},{}]
     res.status(200).send(all_posts);
   } catch (error) {
-    res.status().send({
+    console.log("error:", error.message);
+    res.status(404).send({
       message: error.message,
       error_message: "not success",
     });

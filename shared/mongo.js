@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb"); // inside mongo db lot of funtion, class ,availble , we need here only MongoClient class;
 const DB_URL =
-  "mongodb+srv://gokul:gokul2506@learningdb.iprp18j.mongodb.net/posts_users?retryWrites=true&w=majority";
+  "mongodb+srv://muthu:muthu123@cluster1.q9tm6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const DB_NAME = "posts_users";
 
 const client = new MongoClient(DB_URL); // obj literals class to obj client.connect() ;
