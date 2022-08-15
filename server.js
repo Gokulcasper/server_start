@@ -26,9 +26,6 @@ let PORT = 5000;
       console.log("server is running at port", PORT);
     });
   } catch (error) {
-    res.status(500).send({
-      message: error.message,
-      error_message: "Server is not created",
-    });
+    console.log("Error:", error.message)
   }
 })();
