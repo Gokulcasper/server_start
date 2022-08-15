@@ -1,4 +1,4 @@
-const { MongoClient } = required("mongodb");
+const { MongoClient } = require("mongodb");
 const DB_URL =
   "mongodb+srv://muthu:muthu123@cluster1.q9tm6.mongodb.net/gokul_posts?retryWrites=true&w=majority";
 const DB_NAME = "gokul_posts";
