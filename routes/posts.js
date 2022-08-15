@@ -1,60 +1,29 @@
 const db = require("../shared/mongo");
-
 const postApi = require("express").Router();
 
-//create  new post :
-
-// front end axios req
-// const [state, setState] = useState({
-//   title: "",
-//   description: "",
-//   location: "",
-// });
-// const createNewPost = async() => {
-//   let create_post=await axios.post("http://localhost:5000/posts",state);
-//   console.log(create_post.data.message);
-//  }
-
 postApi.post("/", async (req, res) => {
-  console.log("post requested");
   try {
-    let postData = req.body;
-    console.log("bdy dta:", req.body);
-
-    await db.posts.insertOne(postData);
-    res.status(201).send({ message: "post created successfully" });
+    const postData = req.body;
+    await db.g_posts.insertOne(postData);
+    res.status(201).send({ Message: " Post Created Successfully " });
   } catch (error) {
-    res.status(500).send({
-      message: error.message,
-      error_message: "Post is not created.",
+    res.status(404).send({
+      message: error.Message,
+      error_message: "Post is Not Created",
     });
   }
 });
-
-// const [allPosts, setAllPosts] = useState([]);
-// get axios req
-// const getAllPosts =async () => {
-//   let all_posts=await axios.get("http://localhost:5000/posts");
-//   setAllPosts(allPosts.data);
-//  }
-
-// get all posts route;
 
 postApi.get("/", async (req, res) => {
   try {
-    const all_posts = await db.posts.find().toArray(); //[{},{}]
-    res.status(200).send(all_posts);
+    const get_posts = await db.g_posts.find().toArray();
+    res.status(200).send(get_posts);
   } catch (error) {
-    console.log("error:", error.message);
     res.status(404).send({
-      message: error.message,
-      error_message: "not success",
+      message: error.Message,
+      error_message: "Your Post willNot Get",
     });
   }
 });
-
-// get single post using id;
-
-// postApi.get();
 
 module.exports = postApi;
