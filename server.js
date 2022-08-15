@@ -1,19 +1,26 @@
 const cors = require("cors");
 const express = require("express");
-const { g_posts } = require("./shared/mongo");
+const postApi = require("./routes/posts");
 const db = require("./shared/mongo");
 
 const server = express();
 
 let PORT = 5000;
 
-async () => {
+(async () => {
   try {
-    server.use(cros("*"));
+    server.use(cors("*"));
     server.use(express.json());
-    await db.connect();
     server.get("/", (req, res) => {
-      res.status(201).send("server is Running Successfully");
+      res.status(200).send("server is Running Successfully");
+    });
+
+    await db.connect();
+
+    server.use("/posts", postApi); //
+
+    server.listen(PORT, () => {
+      console.log("server is running at port", PORT);
     });
   } catch (error) {
     res.status(500).send({
@@ -21,10 +28,4 @@ async () => {
       error_message: "Server is not created",
     });
   }
-
-  server.use("/g_posts", g_posts);
-
-  server.listen(PORT, () => {
-    console.log("server is running at port", PORT);
-  });
-};
+})();
