@@ -1,9 +1,10 @@
+const { ObjectId } = require('mongodb');
 const db = require('../shared/mongo');
 const postApi = require("express").Router();
 
 postApi.post("/", async (req, res) => {
-  console.log("in Post")
   try {
+    console.log("in Post")
     const post_data = req.body;
     await db.g_posts.insertOne(post_data);
     res.status(201).send({ message: "your post created successfully" })
@@ -17,8 +18,8 @@ postApi.post("/", async (req, res) => {
 
 
 postApi.get("/", async (req, res) => {
-  console.log("in find all post")
   try {
+    console.log("in find all post")
     const all_post = await db.g_posts.find().toArray();
     res.status(200).send({ message: "Successfully Get all data", data: all_post });
   } catch (error) {
@@ -27,6 +28,21 @@ postApi.get("/", async (req, res) => {
       error_message: "Error To Fetch Data"
     })
   }
+})
+
+postApi.get("/:id", async (req, res) => {
+  try {
+    console.log("in find selected data")
+    const post_Id = req.params.id;
+    const single_post = await db.g_posts.findOne({ _id: ObjectId(post_Id) })
+    res.status(200).send({ message: "successfully get selected data", single_post })
+  } catch (error) {
+    res.status(404).send({
+      message: error.message,
+      error_message: "Invalid Request, check your url"
+    })
+  }
+
 })
 
 module.exports = postApi
