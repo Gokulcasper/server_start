@@ -12,7 +12,7 @@ let PORT = 5000;
 
 (async () => {
   try {
-    server.use(cors("*")); // not Access all url
+    server.use(cors("*")); // Access all url
     server.use(express.json()); //string ("{"names":"["muthu","gokul"]"}") => JSON ({name:["muthu","gokul"]})
     server.get("/", (req, res) => {
       res.status(200).send("server is Running Successfully");

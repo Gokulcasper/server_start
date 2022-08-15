@@ -45,4 +45,43 @@ postApi.get("/:id", async (req, res) => {
 
 })
 
+postApi.put("/:id", async (req, res) => {
+  try {
+    console.log("in post update");
+    const post_Id = req.params.id;
+    const update_post = req.body;
+    await db.g_posts.findOneAndUpdate({ _id: ObjectId(post_Id) }, { $set: { ...update_post } }, { returnDocument: "after" })
+    res.status(200).send({ message: "successfully updated" })
+    // { new: true }, (error, doc) => {
+    //   if (error) {
+    //     res.status(404).send("invalid data")
+    //   }
+
+    //   res.status(200).send({
+    //     message: "successfully updated",
+    //     response: doc.value
+    //   })
+  } catch (error) {
+    res.status(404).send({
+      message: error.message,
+      error_message: "Not Updated, check your url"
+    })
+  }
+})
+
+postApi.delete("/:id", async (req, res) => {
+  try {
+    console.log("in delete post")
+    const post_Id = req.params.id;
+    await db.g_posts.deleteOne({ _id: ObjectId(post_Id) })
+    res.status(200).send({ message: "successfully " })
+  } catch (error) {
+    res.status(404).send({
+      message: error.message,
+      error_message: "post deleted, check your url"
+    })
+  }
+})
+
+
 module.exports = postApi
