@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb"); // inside mango db have many class & function. we need only MongoClient class
-const DB_URL =
-  "mongodb+srv://muthu:muthu123@cluster1.q9tm6.mongodb.net/gokul_posts?retryWrites=true&w=majority";
+const DB_URL = "mongodb+srv://GokulCasper:Gokul_2506@gokulcaper.lr72vn2.mongodb.net/?retryWrites=true&w=majority";
+// "mongodb+srv://muthu:muthu123@cluster1.q9tm6.mongodb.net/gokul_posts?retryWrites=true&w=majority";
 const DB_NAME = "gokul_posts";
 
 const client = new MongoClient(DB_URL); // obj literals

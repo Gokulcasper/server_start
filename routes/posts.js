@@ -74,7 +74,7 @@ postApi.delete("/:id", async (req, res) => {
     console.log("in delete post")
     const post_Id = req.params.id;
     await db.g_posts.deleteOne({ _id: ObjectId(post_Id) })
-    res.status(200).send({ message: "successfully " })
+    res.status(200).send({ message: "successfully Deleted" })
   } catch (error) {
     res.status(404).send({
       message: error.message,
